@@ -6,7 +6,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import Header2 from "../../Shared/Header2/Header2";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [error, setError] = useState('');
@@ -14,6 +14,7 @@ const Signup = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(true);
   const {signUp, loading, signUpWithGoogle, signUpWithFb} = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignUp = (e)=>{
     e.preventDefault();
@@ -48,7 +49,7 @@ const Signup = () => {
 
     if(password !== confirmPassword){
       setError("Your password doesn't matched.");
-      return
+      return;
     }
     signUp(email, password)
     .then(res =>{
@@ -59,12 +60,12 @@ const Signup = () => {
           return <span className="loading loading-ring loading-lg"></span>
         }
         toast.success('Your account has been created successfully');
-        // navigate('/');
+        navigate(location?.state ? location.state : '/');
         e.target.reset();
       }
     )
     .catch(err =>{
-      toast.warning(err.message);
+      setError(err.message);
     })  
   }
   const handleGoogleSignUp = () =>{

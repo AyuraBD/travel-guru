@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { FaFacebookF } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
-import { Link, useNavigate} from 'react-router-dom'
+import { Link, useLocation, useNavigate} from 'react-router-dom'
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io'
 import Header2 from '../../Shared/Header2/Header2'
 import { AuthContext } from '../../Providers/AuthProvider'
@@ -12,6 +12,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const {signIn, signUpWithGoogle, signUpWithFb, loading} = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignIn = (e) =>{
     e.preventDefault();
@@ -22,7 +23,7 @@ const Login = () => {
     signIn(email, password)
     .then(() =>{
       toast.success('You are logged in successfully');
-      navigate('/');
+      navigate(location?.state ? location.state : '/');
       e.target.reset();
     })
     .catch(err =>{
