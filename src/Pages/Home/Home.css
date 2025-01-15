@@ -1,0 +1,12 @@
+.swiper-slide-active {
+  border: #F9A51A 2px solid;
+  border-radius: 18px;
+  transition: all 0.3s;
+}
+.swiper-slide-active div {
+    --tw-bg-opacity: 0;
+  }
+.swiper-pagination{
+    bottom: 0;
+    margin-bottom: 10px;
+}

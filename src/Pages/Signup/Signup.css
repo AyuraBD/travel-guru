@@ -1,0 +1,19 @@
+
+.orselection::after{
+    position: absolute;
+    content:'';
+    width:35%;
+    height: 2px;
+    background-color: #AAAAAA;
+    right:12%;
+    bottom:40%;
+}
+.orselection::before{
+    position: absolute;
+    content:'';
+    width:35%;
+    height: 2px;
+    background-color: #AAAAAA;
+    left:12%;
+    bottom:40%;
+}
